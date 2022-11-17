@@ -40,5 +40,4 @@ Actors:
 AutoRun:
 - When:
     mongodb_setup:
-      $eq:
-      - standalone
+      $eq: standalone
