@@ -28,6 +28,7 @@ ActorTemplates:
             OperationIsQuiet: true
             OperationCommand:
               ping: 1
+
 Actors:
 - ActorFromTemplate:
     TemplateName: PingTemplate
