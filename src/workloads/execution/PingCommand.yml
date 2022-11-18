@@ -12,7 +12,7 @@ ActorTemplates:
     OperationIsQuiet: {^Parameter: {Name: "Quiet", Default: true}}
     Phases:
       OnlyActiveInPhases:
-        Active: {^Parameter: {Name: "Active", Default: [0]}}  # [7]
+        Active: {^Parameter: {Name: "Active", Default: [0]}}
         NopInPhasesUpTo: *MaxPhases
         PhaseConfig:
           Duration: {^Parameter: {Name: "Duration", Default: "30 seconds"}}
