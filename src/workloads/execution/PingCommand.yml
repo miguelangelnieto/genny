@@ -15,7 +15,6 @@ ActorTemplates:
     Name: {^Parameter: {Name: "Name", Default: "SingleThreadPing"}}
     Type: RunCommand
     Threads: {^Parameter: {Name: "Threads", Default: 1}}
-    OperationIsQuiet: {^Parameter: {Name: "Quiet", Default: true}}
     Phases:
       OnlyActiveInPhases:
         Active: {^Parameter: {Name: "Active", Default: [0]}}
