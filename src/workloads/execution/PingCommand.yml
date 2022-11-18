@@ -35,7 +35,7 @@ Actors:
     TemplateName: PingTemplate
     TemplateParameters:
       Name: MultiThreadPing
-      Threads: 100
+      Threads: 16
 
 AutoRun:
 - When:
