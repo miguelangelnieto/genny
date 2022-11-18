@@ -2,41 +2,51 @@ SchemaVersion: 2018-07-01
 Owner: "@mongodb/product-perf"
 Description: >
   This is a simple test that runs ping command on MongoDB to meassure the latency of command dispatch.
-
+MaxPhases: &MaxPhases 3
 ActorTemplates:
 - TemplateName: PingTemplate
   Config:
     Name: {^Parameter: {Name: "Name", Default: "SingleThreadPing"}}
     Type: RunCommand
     Threads: {^Parameter: {Name: "Threads", Default: 1}}
+    OperationIsQuiet: {^Parameter: {Name: "Quiet", Default: true}}
     Phases:
-    - GlobalRate: 50%
-      Duration: 30 seconds
-      Database: admin
-      Operations:
-      - OperationName: RunCommand
-        OperationCommand:
-          ping: 1
-    - Duration: 30 seconds
-      Database: admin
-      Operations:
-      - OperationName: RunCommand
-        OperationCommand:
-          ping: 1
-
+      OnlyActiveInPhases:
+        Active: {^Parameter: {Name: "Active", Default: [0]}}  # [7]
+        NopInPhasesUpTo: *MaxPhases
+        PhaseConfig:
+          Duration: {^Parameter: {Name: "Duration", Default: "30 Seconds"}}
+          GlobalRate: {^Parameter: {Name: "Rate", Default: "50%"}}
+          Database: admin
+          Operations:
+          - OperationName: RunCommand
+            OperationIsQuiet: true
+            OperationCommand:
+              ping: 1
 Actors:
 - ActorFromTemplate:
     TemplateName: PingTemplate
     TemplateParameters:
+      Name: SingleThreadPingRateLimited
+- ActorFromTemplate:
+    TemplateName: PingTemplate
+    TemplateParameters:
       Name: SingleThreadPing
-      Threads: 1
-
+      Rate: 100%
+      Active: [1]
+- ActorFromTemplate:
+    TemplateName: PingTemplate
+    TemplateParameters:
+      Name: MultiThreadPingRateLimited
+      Threads: 64
+      Active: [2]
 - ActorFromTemplate:
     TemplateName: PingTemplate
     TemplateParameters:
       Name: MultiThreadPing
       Threads: 64
-
+      Rate: 100%
+      Active: [3]
 AutoRun:
 - When:
     mongodb_setup:
