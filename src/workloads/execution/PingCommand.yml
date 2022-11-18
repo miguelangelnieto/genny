@@ -2,6 +2,12 @@ SchemaVersion: 2018-07-01
 Owner: "@mongodb/product-perf"
 Description: >
   This is a simple test that runs ping command on MongoDB to meassure the latency of command dispatch.
+
+Clients:
+  Default:
+    QueryOptions:
+      maxPoolSize: 500
+
 MaxPhases: &MaxPhases 3
 ActorTemplates:
 - TemplateName: PingTemplate
