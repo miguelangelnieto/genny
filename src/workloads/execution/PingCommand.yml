@@ -15,7 +15,7 @@ ActorTemplates:
         Active: {^Parameter: {Name: "Active", Default: [0]}}  # [7]
         NopInPhasesUpTo: *MaxPhases
         PhaseConfig:
-          Duration: {^Parameter: {Name: "Duration", Default: "30 Seconds"}}
+          Duration: {^Parameter: {Name: "Duration", Default: "30 seconds"}}
           GlobalRate: {^Parameter: {Name: "Rate", Default: "50%"}}
           Database: admin
           Operations:
