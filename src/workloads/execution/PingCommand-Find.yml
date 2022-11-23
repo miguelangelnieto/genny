@@ -10,6 +10,7 @@ Clients:
 Actors:
 - Name: InsertOne
   Type: Insert
+  Database: "test"
   Threads: 1
   Phases:
   - Collection: "col"
@@ -25,6 +26,7 @@ Actors:
   Phases:
   - {Nop: true}
   - Duration: 30 seconds
+    Database: test
     Rate: 50%
     Operations:
     - OperationCommand:
@@ -42,6 +44,7 @@ Actors:
   - {Nop: true}
   - {Nop: true}
   - Duration: 30 seconds
+    Database: test
     Rate: 100%
     Operations:
     - OperationCommand:
@@ -59,6 +62,7 @@ Actors:
   - {Nop: true}
   - {Nop: true}
   - Duration: 30 seconds
+    Database: test
     Rate: 50%
     Operations:
     - OperationCommand:
@@ -67,7 +71,7 @@ Actors:
       OperationName: RunCommand
       OperationIsQuiet: true
   - {Nop: true}
-- Name: MultiThreadFindRateLimited
+- Name: MultiThreadFind
   Type: RunCommand
   Threads: 1
   Phases:
@@ -76,7 +80,8 @@ Actors:
   - {Nop: true}
   - {Nop: true}
   - Duration: 30 seconds
-    Rate: 50%
+    Database: test
+    Rate: 100%
     Operations:
     - OperationCommand:
         find: "col"
