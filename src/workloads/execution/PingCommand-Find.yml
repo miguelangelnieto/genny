@@ -30,13 +30,13 @@ Actors:
     Rate: 50%
     Operations:
     - OperationCommand:
-        find: "col"
+        find: col
         filter: {a: 50}
       OperationName: RunCommand
       OperationIsQuiet: true
-    - {Nop: true}
-    - {Nop: true}
-    - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
 - Name: SingleThreadFind
   Type: RunCommand
   Threads: 1
@@ -48,12 +48,12 @@ Actors:
     Rate: 100%
     Operations:
     - OperationCommand:
-        find: "col"
+        find: col
         filter: {a: 50}
       OperationName: RunCommand
       OperationIsQuiet: true
-    - {Nop: true}
-    - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
 - Name: MultiThreadFindRateLimited
   Type: RunCommand
   Threads: 1
@@ -66,7 +66,7 @@ Actors:
     Rate: 50%
     Operations:
     - OperationCommand:
-        find: "col"
+        find: col
         filter: {a: 50}
       OperationName: RunCommand
       OperationIsQuiet: true
@@ -84,7 +84,7 @@ Actors:
     Rate: 100%
     Operations:
     - OperationCommand:
-        find: "col"
+        find: col
         filter: {a: 50}
       OperationName: RunCommand
       OperationIsQuiet: true
