@@ -88,3 +88,7 @@ Actors:
         filter: {a: 50}
       OperationName: RunCommand
       OperationIsQuiet: true
+AutoRun:
+- When:
+    mongodb_setup:
+      $eq: standalone
