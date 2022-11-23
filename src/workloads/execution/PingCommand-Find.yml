@@ -1,0 +1,85 @@
+SchemaVersion: 2018-07-01
+Owner: "@mongodb/product-perf"
+Description: >
+  This is a simple test that runs a find on MongoDB to meassure the latency of command dispatch.
+
+Clients:
+  Default:
+    QueryOptions:
+      maxPoolSize: 500
+Actors:
+- Name: InsertOne
+  Type: Insert
+  Threads: 1
+  Phases:
+  - Collection: "col"
+    Document: {"a": 50}
+    Repeat: 1
+  - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
+- Name: SingleThreadFindRateLimited
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - {Nop: true}
+  - Duration: 30 seconds
+    Rate: 50%
+    Operations:
+    - OperationCommand:
+        find: "col"
+        filter: {a: 50}
+      OperationName: RunCommand
+      OperationIsQuiet: true
+    - {Nop: true}
+    - {Nop: true}
+    - {Nop: true}
+- Name: SingleThreadFind
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - {Nop: true}
+  - {Nop: true}
+  - Duration: 30 seconds
+    Rate: 100%
+    Operations:
+    - OperationCommand:
+        find: "col"
+        filter: {a: 50}
+      OperationName: RunCommand
+      OperationIsQuiet: true
+    - {Nop: true}
+    - {Nop: true}
+- Name: MultiThreadFindRateLimited
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
+  - Duration: 30 seconds
+    Rate: 50%
+    Operations:
+    - OperationCommand:
+        find: "col"
+        filter: {a: 50}
+      OperationName: RunCommand
+      OperationIsQuiet: true
+  - {Nop: true}
+- Name: MultiThreadFindRateLimited
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
+  - {Nop: true}
+  - Duration: 30 seconds
+    Rate: 50%
+    Operations:
+    - OperationCommand:
+        find: "col"
+        filter: {a: 50}
+      OperationName: RunCommand
+      OperationIsQuiet: true
