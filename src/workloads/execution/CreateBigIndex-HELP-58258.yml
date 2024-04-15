@@ -1,0 +1,117 @@
+SchemaVersion: 2018-07-01
+Owner: "@mongodb/server-execution"
+Description: |
+  Workload to try to reproduce the issue describe on HELP-58258. Modified from BigIndex.
+
+Keywords:
+- indexes
+
+Actors:
+# Phase 1: Insert enough data
+- Name: InsertData
+  Type: Loader
+  Threads: 1
+  Phases:
+  - LoadConfig:
+      Path: ../../phases/execution/CreateIndexPhase.yml
+      Key: InsertData
+      Parameters:
+        db: &db test
+  - *Nop
+  - *Nop
+
+# Phase 2: Wait
+- Name: Quiesce
+  Type: QuiesceActor
+  Database: *db
+  Threads: 1
+  Phases:
+  - *Nop
+  - Repeat: 1
+  - *Nop
+
+
+# - Name: Setup
+#   Type: RunCommand
+#   Threads: 1
+#   Phases:
+#   - *Nop
+#   - *Nop
+#   - *Nop
+#   - Repeat: 1
+#     Database: admin
+#     Operations:
+#     - OperationMetricsName: LimitIndexBuildMemoryUsageCommand
+#       OperationName: RunCommand
+#       OperationCommand:
+#         setParameter: 1
+#         maxIndexBuildMemoryUsageMegabytes: 100
+#   - *Nop
+#   - *Nop
+#   - *Nop
+#   - *Nop
+#   - *Nop
+#   - *Nop
+#   - *Nop
+#   - *Nop
+#   - *Nop
+
+# Phase 3: Insert more data while creating indexes
+- Name: InsertData
+  Type: Loader
+  Threads: 1
+  Phases:
+  - *Nop
+  - *Nop
+  - LoadConfig:
+      Path: ../../phases/execution/CreateIndexPhase.yml
+      Key: InsertData
+      Parameters:
+        db: &db test
+
+# Phases 3: Build index on int.
+- Name: IndexCollection
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - *Nop
+  - *Nop
+  # Build an index on an integer field.
+  - LoadConfig:
+      Path: ../../phases/execution/CreateIndexPhase.yml
+      Key: CreateIntegerIndexCmd
+      Parameters:
+        Repeat: 5
+
+# Phases 3: Build index on string.
+- Name: IndexCollection
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - *Nop
+  - *Nop
+  # Build an index on a string field.
+  - LoadConfig:
+      Path: ../../phases/execution/CreateIndexPhase.yml
+      Key: CreateStringIndexCmd
+      Parameters:
+        Repeat: 5
+
+
+AutoRun:
+- When:
+    mongodb_setup:
+      $eq:
+      - atlas
+      - atlas-like-replica.2022-10
+      - replica
+      - replica-80-feature-flags
+      - replica-all-feature-flags
+      - single-replica
+      - standalone
+      - standalone-80-feature-flags
+      - standalone-all-feature-flags
+    atlas_setup:
+      $neq:
+      - M30-repl
+
