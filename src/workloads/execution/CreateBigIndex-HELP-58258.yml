@@ -67,7 +67,7 @@ Actors:
       Path: ../../phases/execution/CreateIndexPhase.yml
       Key: InsertData
       Parameters:
-        db: &db test
+        db: *db
 
 # Phases 3: Build index on int.
 - Name: IndexCollection
