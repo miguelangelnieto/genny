@@ -46,7 +46,7 @@ Actors:
       OperationName: RunCommand
       OperationCommand:
         setParameter: 1
-        maxIndexBuildDrainBatchSize: 100
+        maxIndexBuildDrainBatchSize: 2000
   - *Nop
 
 
