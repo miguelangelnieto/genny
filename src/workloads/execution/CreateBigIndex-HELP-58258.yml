@@ -84,6 +84,7 @@ Actors:
   Phases:
   - *Nop
   - *Nop
+  - *Nop
   # Build an index on a string field.
   - LoadConfig:
       Path: ../../phases/execution/CreateIndexPhase.yml
