@@ -23,7 +23,7 @@ InsertDataWhileCrearingIndexes:
   Database: *db
   Threads: 10
   CollectionCount: 1
-  DocumentCount: 100000000
+  DocumentCount: 50000000
   BatchSize: 1000
   Document:
     loc2d: *loc2d
