@@ -6,7 +6,7 @@ Description: |
 InsertData:
   Repeat: 1
   Database: &db {^Parameter: {Name: "db", Default: test}}
-  Threads: 10
+  Threads: 1
   CollectionCount: 1
   DocumentCount: 10000000
   BatchSize: 1000
