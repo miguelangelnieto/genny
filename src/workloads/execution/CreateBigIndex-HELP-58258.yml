@@ -59,7 +59,7 @@ Actors:
 # Phase 3: Insert more data while creating indexes
 - Name: InsertDataWhileCrearingIndexes
   Type: Loader
-  Threads: 1
+  Threads: 10
   Phases:
   - *Nop
   - *Nop
