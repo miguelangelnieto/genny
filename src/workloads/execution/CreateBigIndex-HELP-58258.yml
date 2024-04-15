@@ -17,7 +17,7 @@ Actors:
       Key: InsertData
       Parameters:
         db: &db test
-  - *Nop
+  - &Nop {Nop: true}
   - *Nop
 
 # Phase 2: Wait
