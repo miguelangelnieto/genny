@@ -80,8 +80,6 @@ Actors:
   - LoadConfig:
       Path: ../../phases/execution/CreateIndexPhase.yml
       Key: CreateIntegerIndexCmd
-      Parameters:
-        Repeat: 5
 
 # Phases 3: Build index on string.
 - Name: IndexCollection
@@ -94,9 +92,6 @@ Actors:
   - LoadConfig:
       Path: ../../phases/execution/CreateIndexPhase.yml
       Key: CreateStringIndexCmd
-      Parameters:
-        Repeat: 5
-
 
 AutoRun:
 - When:

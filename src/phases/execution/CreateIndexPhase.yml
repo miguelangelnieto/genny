@@ -31,11 +31,6 @@ CreateIntegerIndexCmd:
       - key:
           randomInt: 1
         name: random_int
-  - OperationMetricsName: DropIndexInt
-    OperationName: RunCommand
-    OperationCommand:
-      dropIndexes: Collection0
-      index: random_int
 
 
 CreateStringIndexCmd:
@@ -50,11 +45,6 @@ CreateStringIndexCmd:
       - key:
           randomString: 1
         name: random_string
-  - OperationMetricsName: DropIndexString
-    OperationName: RunCommand
-    OperationCommand:
-      dropIndexes: Collection0
-      index: random_string
 
 Create2dIndexesCmd:
   Repeat: {^Parameter: {Name: "Repeat", Default: 5}}
