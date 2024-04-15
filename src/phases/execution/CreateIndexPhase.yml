@@ -18,6 +18,20 @@ InsertData:
     randomInt: &randomInt {^RandomInt: {min: -10000000, max: 10000000}}
     attributes: &attributes { color: *randomString, size: *randomString, inside: { bookmark: *randomInt, postitnote: *randomInt }, outside: { dustcover: *randomString }}
 
+InsertDataWhileCrearingIndexes:
+  Repeat: 1
+  Database: *db
+  Threads: 10
+  CollectionCount: 1
+  DocumentCount: 100000000
+  BatchSize: 1000
+  Document:
+    loc2d: *loc2d
+    loc2dSphere: *loc2dSphere
+    point: *point
+    randomString: *randomString
+    randomInt: *randomInt
+    attributes: *attributes
 
 CreateIntegerIndexCmd:
   Repeat: {^Parameter: {Name: "Repeat", Default: 5}}

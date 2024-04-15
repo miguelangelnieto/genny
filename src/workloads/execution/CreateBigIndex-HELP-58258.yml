@@ -57,7 +57,7 @@ Actors:
 #   - *Nop
 
 # Phase 3: Insert more data while creating indexes
-- Name: InsertData
+- Name: InsertDataWhileCrearingIndexes
   Type: Loader
   Threads: 1
   Phases:
@@ -65,7 +65,7 @@ Actors:
   - *Nop
   - LoadConfig:
       Path: ../../phases/execution/CreateIndexPhase.yml
-      Key: InsertData
+      Key: InsertDataWhileCrearingIndexes
       Parameters:
         db: *db
 
