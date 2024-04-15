@@ -19,6 +19,7 @@ Actors:
         db: &db test
   - &Nop {Nop: true}
   - *Nop
+  - *Nop
 
 # Phase 2: Wait
 - Name: Quiesce
@@ -29,23 +30,24 @@ Actors:
   - *Nop
   - Repeat: 1
   - *Nop
+  - *Nop
 
 
-# - Name: Setup
-#   Type: RunCommand
-#   Threads: 1
-#   Phases:
-#   - *Nop
-#   - *Nop
-#   - Repeat: 1
-#     Database: admin
-#     Operations:
-#     - OperationMetricsName: maxIndexBuildDrainMemoryUsageMegabytesCommand
-#       OperationName: RunCommand
-#       OperationCommand:
-#         setParameter: 1
-#         maxIndexBuildDrainMemoryUsageMegabytes: 128
-#   - *Nop
+- Name: Setup
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - *Nop
+  - *Nop
+  - Repeat: 1
+    Database: admin
+    Operations:
+    - OperationMetricsName: maxIndexBuildDrainMemoryUsageMegabytesCommand
+      OperationName: RunCommand
+      OperationCommand:
+        setParameter: 1
+        maxIndexBuildDrainMemoryUsageMegabytes: 256
+  - *Nop
 
 
 # Phase 3: Insert more data while creating indexes
@@ -53,6 +55,7 @@ Actors:
   Type: Loader
   Threads: 10
   Phases:
+  - *Nop
   - *Nop
   - *Nop
   - LoadConfig:
@@ -68,6 +71,7 @@ Actors:
   Phases:
   - *Nop
   - *Nop
+  - *Nop
   # Build an index on an integer field.
   - LoadConfig:
       Path: ../../phases/execution/CreateIndexPhase.yml
@@ -78,6 +82,7 @@ Actors:
   Type: RunCommand
   Threads: 1
   Phases:
+  - *Nop
   - *Nop
   - *Nop
   # Build an index on a string field.
