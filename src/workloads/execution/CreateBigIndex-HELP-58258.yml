@@ -42,11 +42,11 @@ Actors:
   - Repeat: 1
     Database: admin
     Operations:
-    - OperationMetricsName: maxIndexBuildDrainMemoryUsageCommand
+    - OperationMetricsName: maxIndexBuildDrainBatchSizeCommand
       OperationName: RunCommand
       OperationCommand:
         setParameter: 1
-        maxIndexBuildDrainMemoryUsageMegabytes: 64
+        maxIndexBuildDrainBatchSize: 5000
   - *Nop
 
 
