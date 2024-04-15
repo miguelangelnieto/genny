@@ -19,6 +19,7 @@ Actors:
         db: &db test
   - &Nop {Nop: true}
   - *Nop
+  - *Nop
 
 # Phase 2: Wait
 - Name: Quiesce
@@ -29,38 +30,32 @@ Actors:
   - *Nop
   - Repeat: 1
   - *Nop
+  - *Nop
 
 
-# - Name: Setup
-#   Type: RunCommand
-#   Threads: 1
-#   Phases:
-#   - *Nop
-#   - *Nop
-#   - *Nop
-#   - Repeat: 1
-#     Database: admin
-#     Operations:
-#     - OperationMetricsName: LimitIndexBuildMemoryUsageCommand
-#       OperationName: RunCommand
-#       OperationCommand:
-#         setParameter: 1
-#         maxIndexBuildMemoryUsageMegabytes: 100
-#   - *Nop
-#   - *Nop
-#   - *Nop
-#   - *Nop
-#   - *Nop
-#   - *Nop
-#   - *Nop
-#   - *Nop
-#   - *Nop
+- Name: Setup
+  Type: RunCommand
+  Threads: 1
+  Phases:
+  - *Nop
+  - *Nop
+  - Repeat: 1
+    Database: admin
+    Operations:
+    - OperationMetricsName: maxIndexBuildDrainMemoryUsageCommand
+      OperationName: RunCommand
+      OperationCommand:
+        setParameter: 1
+        maxIndexBuildDrainMemoryUsageMegabytes: 64
+  - *Nop
+
 
 # Phase 3: Insert more data while creating indexes
 - Name: InsertDataWhileCrearingIndexes
   Type: Loader
   Threads: 10
   Phases:
+  - *Nop
   - *Nop
   - *Nop
   - LoadConfig:
@@ -74,6 +69,7 @@ Actors:
   Type: RunCommand
   Threads: 1
   Phases:
+  - *Nop
   - *Nop
   - *Nop
   # Build an index on an integer field.
