@@ -46,7 +46,7 @@ Actors:
       OperationName: RunCommand
       OperationCommand:
         setParameter: 1
-        maxIndexBuildDrainMemoryUsageMegabytes: 256
+        maxIndexBuildDrainMemoryUsageMegabytes: 512
   - *Nop
 
 
