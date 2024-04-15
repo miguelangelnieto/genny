@@ -34,7 +34,7 @@ InsertDataWhileCrearingIndexes:
     attributes: *attributes
 
 CreateIntegerIndexCmd:
-  Repeat: {^Parameter: {Name: "Repeat", Default: 5}}
+  Repeat: {^Parameter: {Name: "Repeat", Default: 1}}
   Database: *db
   Operations:
   - OperationMetricsName: CreateIndexInt
@@ -48,7 +48,7 @@ CreateIntegerIndexCmd:
 
 
 CreateStringIndexCmd:
-  Repeat: {^Parameter: {Name: "Repeat", Default: 5}}
+  Repeat: {^Parameter: {Name: "Repeat", Default: 1}}
   Database: *db
   Operations:
   - OperationMetricsName: CreateIndexString
